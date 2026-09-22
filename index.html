@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mechanical Design Engineer Intern — GridxEnergy</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0a0a0a;
+    --surface: #111111;
+    --surface2: #1a1a1a;
+    --gold: #d4a017;
+    --gold-light: #e8b830;
+    --white: #ffffff;
+    --gray: #888888;
+    --border: rgba(255,255,255,0.08);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 2.5rem;
+    border-bottom: 0.5px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--black);
+    z-index: 100;
+  }
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--gold);
+    padding: 8px 18px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+  .hero {
+    padding: 5rem 2.5rem 4rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+  }
+  .eyebrow::before { content: '// '; color: var(--gray); }
+  .hero-heading {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(52px, 10vw, 96px);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 2rem;
+  }
+  .hero-heading .accent { color: var(--gold); }
+  .hero-meta { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+  .hero-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 4px 10px;
+  }
+  .hero-sub { font-size: 14px; color: var(--gray); letter-spacing: 0.02em; }
+  .about-strip {
+    padding: 3.5rem 2.5rem;
+    border-bottom: 0.5px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .about-text p { color: #c8c8c8; font-size: 15px; line-height: 1.75; margin-bottom: 1rem; }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-skills { display: flex; flex-direction: column; gap: 0; }
+  .skill-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .skill-row:first-child { border-top: 0.5px solid var(--border); }
+  .skill-diamond {
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .skill-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+  .skill-desc { font-size: 12px; color: var(--gray); line-height: 1.5; }
+  .works { padding: 4rem 2.5rem; }
+  .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 2.5rem; }
+  .section-heading {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(32px, 6vw, 52px);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--white);
+  }
+  .section-heading .accent { color: var(--gold); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: 640px;
+    gap: 1px;
+    background: var(--border);
+  }
+  .project-card {
+    background: var(--surface);
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .project-card:hover { background: var(--surface2); }
+  .project-card:hover .proj-cover img { transform: scale(1.04); filter: brightness(1); }
+  .proj-cover {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 0.5px solid var(--border);
+    background: #0a0a0a;
+    flex-shrink: 0;
+  }
+  .proj-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.4s ease, filter 0.4s ease;
+    filter: brightness(0.85);
+  }
+  .proj-cover-label {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(10,10,10,0.75);
+    padding: 4px 10px;
+    border: 0.5px solid var(--gold);
+    backdrop-filter: blur(4px);
+  }
+  .proj-body {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    flex: 1;
+  }
+  .proj-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-top: 0.5px solid var(--border);
+    margin-top: auto;
+  }
+  .proj-index {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .proj-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(18px, 3.5vw, 26px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+  .proj-desc { font-size: 13px; color: var(--gray); }
+  .proj-arrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .proj-arrow::after { content: '→'; font-size: 16px; }
+  .back-section {
+    padding: 2.5rem 2.5rem 4rem;
+    border-top: 0.5px solid var(--border);
+  }
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gray);
+    border: 0.5px solid var(--border);
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+    cursor: pointer;
+    background: none;
+  }
+  .back-btn::before { content: '←'; font-size: 14px; }
+  .back-btn:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* OVERLAY */
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--black);
+    z-index: 9999;
+    flex-direction: column;
+  }
+  .overlay.open { display: flex; }
+  .overlay-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    border-bottom: 0.5px solid var(--border);
+    flex-shrink: 0;
+    gap: 1rem;
+  }
+  .overlay-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .overlay-count {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--gray);
+    white-space: nowrap;
+  }
+  .close-btn {
+    background: none;
+    border: 0.5px solid var(--border);
+    color: var(--white);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: border-color 0.2s, color 0.2s;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .close-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* Progress bar */
+  .progress-bar-wrap {
+    height: 2px;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--gold);
+    transition: width 0.35s ease;
+  }
+
+  .slides-wrapper { flex: 1; overflow: hidden; position: relative; }
+  .slides-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    will-change: transform;
+  }
+  .slide {
+    min-width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding: 1.25rem 2.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .slide-img {
+    width: 100%;
+    height: auto;
+    max-height: 52vh;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    margin: 0.75rem 0 1.25rem;
+    border: 0.5px solid rgba(255,255,255,0.08);
+    background: #0f0f0f;
+  }
+  .slide-fig {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 0.35rem;
+  }
+  .slide-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .slide-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .slide h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(26px, 5.5vw, 44px);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.0;
+    color: var(--white);
+    margin-bottom: 1.25rem;
+  }
+  .slide h2 .accent { color: var(--gold); }
+  .slide p {
+    font-size: 14px;
+    color: #b0b0b0;
+    line-height: 1.75;
+    max-width: 640px;
+    margin-bottom: 0.75rem;
+  }
+  .slide ul { list-style: none; margin-top: 0.75rem; display: flex; flex-direction: column; gap: 9px; }
+  .slide ul li {
+    font-size: 13px;
+    color: #a0a0a0;
+    padding-left: 1.25rem;
+    position: relative;
+    line-height: 1.55;
+  }
+  .slide ul li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 6px;
+    top: 6px;
+  }
+
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 2rem;
+    border-top: 0.5px solid var(--border);
+    flex-shrink: 0;
+    gap: 1rem;
+  }
+  .nav-btn {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: none;
+    border: 0.5px solid var(--border);
+    padding: 8px 18px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+  .nav-btn:disabled { opacity: 0.25; cursor: default; }
+  .nav-btn:not(:disabled):hover { border-color: var(--gold); color: var(--gold); }
+  .progress-dots { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; justify-content: center; max-width: 180px; }
+  .dot {
+    width: 5px;
+    height: 5px;
+    background: rgba(255,255,255,0.12);
+    transform: rotate(45deg);
+    transition: background 0.2s, transform 0.2s;
+    flex-shrink: 0;
+  }
+  .dot.active { background: var(--gold); transform: rotate(45deg) scale(1.4); }
+
+  /* GALLERY */
+  .gallery { padding: 4rem 2.5rem; border-top: 0.5px solid var(--border); }
+  .gallery-note {
+    font-size: 13px;
+    color: var(--gray);
+    max-width: 640px;
+    margin: -1rem 0 2.5rem;
+    line-height: 1.7;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--border);
+  }
+  .gallery-item {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    background: var(--surface);
+    aspect-ratio: 4 / 3;
+  }
+  .gallery-item img, .gallery-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.82);
+    transition: transform 0.4s ease, filter 0.4s ease;
+  }
+  .gallery-item:hover img, .gallery-item:hover video { transform: scale(1.05); filter: brightness(1); }
+  .gallery-caption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 0.85rem 1rem 0.7rem;
+    background: linear-gradient(transparent, rgba(10,10,10,0.92));
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .gallery-empty {
+    grid-column: 1 / -1;
+    border: 1px dashed var(--border);
+    padding: 3rem 1.5rem;
+    text-align: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    background: var(--surface);
+  }
+  .gallery-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,10,0.97);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2rem;
+  }
+  .gallery-lightbox.open { display: flex; }
+  .gallery-lightbox img, .gallery-lightbox video {
+    max-width: 90vw;
+    max-height: 74vh;
+    object-fit: contain;
+    border: 0.5px solid var(--border);
+    background: #0f0f0f;
+  }
+  .gallery-lightbox-caption {
+    margin-top: 1.25rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-align: center;
+    max-width: 640px;
+  }
+  .gallery-lightbox-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.5rem;
+    background: none;
+    border: 0.5px solid var(--border);
+    color: var(--white);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .gallery-lightbox-close:hover { border-color: var(--gold); color: var(--gold); }
+  .gallery-lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: 0.5px solid var(--border);
+    color: var(--white);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .gallery-lightbox-nav:hover { border-color: var(--gold); color: var(--gold); }
+  .gallery-lightbox-nav:disabled { opacity: 0.2; cursor: default; }
+  .gallery-lightbox-prev { left: 1.5rem; }
+  .gallery-lightbox-next { right: 1.5rem; }
+  .gallery-lightbox-count {
+    position: absolute;
+    top: 1.35rem;
+    left: 1.5rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--gray);
+  }
+
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { display: none; }
+    .hero { padding: 3rem 1.25rem 2.5rem; }
+    .about-strip { grid-template-columns: 1fr; padding: 2.5rem 1.25rem; gap: 2rem; }
+    .works { padding: 3rem 1.25rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .proj-body { padding: 1.25rem; }
+    .back-section { padding: 2rem 1.25rem 3rem; }
+    .slide { padding: 2rem 1.25rem 1rem; }
+    .nav-row { padding: 0.75rem 1rem; }
+    .overlay-header { padding: 0.85rem 1rem; }
+    .overlay-logo { font-size: 10px; }
+    .progress-dots { max-width: 120px; }
+    .proj-body { padding: 1.25rem; gap: 1rem; }
+    .gallery { padding: 3rem 1.25rem; }
+    .gallery-lightbox { padding: 1rem; }
+    .gallery-lightbox-nav { width: 34px; height: 34px; }
+    .gallery-lightbox-prev { left: 0.5rem; }
+    .gallery-lightbox-next { right: 0.5rem; }
+    .gallery-lightbox-count { left: 1rem; top: 1rem; }
+    .gallery-lightbox-close { top: 1rem; right: 1rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .slides-track { transition: none; }
+    .progress-bar-fill { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">GridxEnergy</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#works">Works</a></li>
+    <li><a href="mailto:">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:">Let's connect</a>
+</nav>
+
+<section class="hero" id="about">
+  <p class="eyebrow">Internship — GridxEnergy</p>
+  <h1 class="hero-heading">Mechanical<br><span class="accent">Design</span><br>Engineer</h1>
+  <div class="hero-meta">
+    <span class="hero-tag">Intern</span>
+    <span class="hero-sub">EV battery systems · Chassis integration · Hardware design</span>
+  </div>
+</section>
+
+<section class="about-strip">
+  <div class="about-text">
+    <p>At GridxEnergy I work at the intersection of mechanical architecture and EV platform design — taking hardware from concept to physical validation under real development constraints.</p>
+    <p>My focus is on subsystem integration, packaging decisions, and first-principles reasoning — making sure every design choice can be traced back to a clear engineering rationale.</p>
+  </div>
+  <div class="about-skills">
+    <div class="skill-row">
+      <div class="skill-diamond"></div>
+      <div>
+        <div class="skill-title">EV Platform Architecture</div>
+        <div class="skill-desc">Battery system packaging, swappable modules, chassis integration</div>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-diamond"></div>
+      <div>
+        <div class="skill-title">Mechanical Interface Design</div>
+        <div class="skill-desc">Latch mechanisms, alignment systems, structural load paths</div>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-diamond"></div>
+      <div>
+        <div class="skill-title">FEA & Structural Analysis</div>
+        <div class="skill-desc">Boundary conditions, mesh strategy, load case definition</div>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-diamond"></div>
+      <div>
+        <div class="skill-title">Prototype & Validation</div>
+        <div class="skill-desc">3D printing, vehicle integration, physical testing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="works" id="works">
+  <div class="section-header">
+    <h2 class="section-heading">Selected <span class="accent">Works</span></h2>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card" onclick="openSlides()" role="button" tabindex="0" aria-label="Open project workflow">
+      <div class="proj-cover">
+        <img src="scooter conversion project cover.jpeg" alt="Scooter Conversion Project Cover">
+        <span class="proj-cover-label">// 01 — EV Platform Design</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-index">// 01 — EV Platform Design</div>
+        <div class="proj-title">Converting a fixed-battery EV into a swappable-battery platform under existing chassis constraints</div>
+        <div class="proj-desc">14-figure workflow — concept · CAD · FEA · optimisation · prototype · integration</div>
+      </div>
+      <div class="proj-footer">
+        <div class="proj-arrow">View workflow</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="section-header">
+    <h2 class="section-heading">Further <span class="accent">Work</span></h2>
+  </div>
+  <p class="gallery-note">Additional projects at GridxEnergy where the full workflow can't be shown due to NDA. Images below give a glimpse of the work — click any image to view it larger.</p>
+  <div class="gallery-grid" id="galleryGrid"></div>
+</section>
+
+<!-- GALLERY LIGHTBOX -->
+<div class="gallery-lightbox" id="galleryLightbox" role="dialog" aria-modal="true" aria-label="Gallery image viewer">
+  <span class="gallery-lightbox-count" id="galleryCount">01 / 01</span>
+  <button class="gallery-lightbox-close" onclick="closeGallery()" aria-label="Close gallery">✕</button>
+  <button class="gallery-lightbox-nav gallery-lightbox-prev" id="galleryPrevBtn" onclick="changeGallery(-1)" aria-label="Previous image">←</button>
+  <img id="galleryImg" src="" alt="">
+  <button class="gallery-lightbox-nav gallery-lightbox-next" id="galleryNextBtn" onclick="changeGallery(1)" aria-label="Next image">→</button>
+  <div class="gallery-lightbox-caption" id="galleryCaption"></div>
+</div>
+
+<div class="back-section">
+  <a class="back-btn" href="#">Back to portfolio</a>
+</div>
+
+<!-- SLIDESHOW OVERLAY -->
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Project workflow slideshow">
+  <div class="overlay-header">
+    <span class="overlay-logo">// Swappable battery platform</span>
+    <span class="overlay-count" id="slideCount">Fig. 01 / 13</span>
+    <button class="close-btn" onclick="closeSlides()" aria-label="Close slideshow">✕</button>
+  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar" style="width:7.69%"></div></div>
+
+  <div class="slides-wrapper">
+    <div class="slides-track" id="track">
+
+      <div class="slide">
+        <div class="slide-fig">Fig. 1</div>
+        <div class="slide-eyebrow">Design Challenge</div>
+        <h2>Converting a fixed battery EV into a <span class="accent">swappable battery platform</span></h2>
+        <img src="Slide1.gif" alt="Design Challenge — Fixed Battery EV Conversion" class="slide-img">
+        <p>The challenge: integrate a swappable battery system into an existing electric two-wheeler without modifying the original chassis architecture. The objective was not simply to design a battery mount, but to develop a structural interface that satisfied packaging constraints, structural integrity, serviceability, and ease of battery replacement simultaneously.</p>
+        <ul>
+          <li>Existing chassis architecture and envelope must remain unmodified</li>
+          <li>Battery CG position to be preserved for vehicle dynamics</li>
+          <li>Structural interface must carry inertial loads from road inputs</li>
+          <li>Design must enable tool-free battery exchange by a single person</li>
+        </ul>
+      </div>
+
+      <div class="slide">
+        <div class="slide-fig">Fig. 2</div>
+        <div class="slide-eyebrow">Package Space Analysis</div>
+        <h2>Understanding available space &amp; <span class="accent">chassis constraints</span></h2>
+        <img src="Slide2.png" alt="Package Space Analysis — Chassis Constraints" class="slide-img">
+        <p>Before any concept work, the available package space and chassis constraints were mapped in detail. Every hard point — subframe mounts, cable conduits, ground clearance limits, and existing battery envelope — was documented to bound the design space.</p>
+        <ul>
+          <li>Floor geometry and subframe mount locations non-negotiable</li>
+          <li>High-voltage cable routing constrained by existing conduits</li>
+          <li>Battery envelope and mass distribution targets defined</li>
+          <li>Swap access direction selected against chassis geometry</li>
+        </ul>
+      </div>
+
+      <div class="slide">
+        <div class="slide-fig">Fig. 3</div>
+        <div class="slide-eyebrow">Concept Development</div>
+        <h2>Initial concepts through <span class="accent">hand sketches</span></h2>
+        <img src="Slide3.png" alt="Concept Development — Hand Sketches and Initial Layouts" class="slide-img">
+        <p>Multiple mounting concepts were explored through hand sketches — evaluating extraction directions, latch positions, and structural load paths against the constraints documented in the package analysis. Sketching allowed rapid iteration before committing CAD time.</p>
+        <ul>
+          <li>Dock and cradle concept defined: battery seats into a structural receiver</li>
+          <li>Bolting pattern and mount geometry roughed out on paper</li>
+          <li>Load path traced from battery CG through dock to chassis bolts</li>
+          <li>Version 1 geometry locked for CAD development</li>
+        </ul>
+      </div>
+
+      <div class="slide">
+        <div class="slide-fig">Fig. 4</div>
+        <div class="slide-eyebrow">CAD Development</div>
+        <h2>3D model of the <span class="accent">battery dock &amp; mount assembly</span></h2>
+        <img src="Slide4.gif" alt="CAD Development — Battery Dock 3D Model" class="slide-img">
+        <p>The sketch concept was developed into a full parametric CAD model. The dock was modelled with bolted interfaces at base and side locations; the dock mount in PETG and base plate in structural steel were designed as separate bodies joined by bolts and holes — replicating real assembly conditions.</p>
+        <ul>
+          <li>Dock mount (PETG) and scooter base platform (structural steel) modelled separately</li>
+          <li>Bolted joints at base and side — no bonded simplifications</li>
+          <li>Wall thickness and geometry driven by anticipated load transfer</li>
+          <li>Model structured for direct import into FEA without geometry cleanup</li>
+        </ul>
+      </div>
+
+      <div class="slide">
+        <div class="slide-fig">Fig. 5</div>
+        <div class="slide-eyebrow">Assembly Integration</div>
+        <h2>Full vehicle context &amp; <span class="accent">packaging validation</span></h2>
+        <img src="Slide5.png" alt="Assembly Integration — Full Vehicle Context" class="slide-img">
+        <p>The CAD assembly was validated in full vehicle context — dock, battery, and scooter platform together. Packaging validation confirmed the design fits within the existing vehicle envelope before structural work began. Structural integrity validation was the next step.</p>
+        <ul>
+          <li>Packaging validation completed: zero chassis modifications required</li>
+          <li>Battery seating position and CG location confirmed in assembly</li>
+          <li>Connector and service access routes verified in digital build</li>
+          <li>Assembly passed to FEA for structural integrity validation</li>
+        </ul>
+      </div>
+
+      <div class="slide">
+        <div class="slide-fig">Fig. 6</div>
+        <div class="slide-eyebrow">FEA Model Setup</div>
+        <h2>Contact definitions, boundary conditions &amp; <span class="accent">remote load at battery CG</span></h2>
+        <img src="Slide6.png" alt="FEA Model Setup — Contacts and Boundary Conditions" class="slide-img">
+        <p>The FEA model was built with realistic contact definitions: bodies joined by bolts and holes, not bonded surfaces — just like the real assembly. Fixed boundary conditions applied at chassis bolt locations; a remote load at the battery CG captures the full moment transferred to the mounting structure.</p>
+        <ul>
+          <li>No bonded contacts — all interfaces defined by bolts through holes</li>
+          <li>Fixed supports at chassis attachment bolt locations</li>
+          <li>Remote point at battery CG: load path is Battery CG → Dock → Bolts → Dock Mount [PETG] → Base Platform [structural steel]</li>
+          <li>PETG material properties assigned to dock mount; structural steel to base</li>
+        </ul>
+      </div>
+
+      <div class="slide">
+        <div class="slide-fig">Fig. 7</div>
+        <div class="slide-eyebrow">Defining FEA Load Cases Through Hand Calculations</div>
+        <h2>6 load cases defined from <span class="accent">first principles</span></h2>
+        <img src="Slide7.png" alt="Load Case Definition — Hand Calculations for FEA" class="slide-img">
+        <p>Load cases were defined through hand calculations before FEA — establishing the g-force magnitudes and directions for each real-world scenario. Six cases were identified to envelope the structural demands across normal use and worst-case events.</p>
+        <ul>
+          <li>1g vertical — battery self weight (baseline)</li>
+          <li>3g–6g vertical bump — potholes, jumps, rough roads</li>
+          <li>2g lateral — cornering</li>
+          <li>2g longitudinal (forward) — acceleration; 2g longitudinal (reverse) — braking</li>
+          <li>Combined loading — worst case real-world condition</li>
+        </ul>
+      </div>
+
+      <div class="slide">
+        <div class="slide-fig">Fig. 8</div>
+        <img src="Slide8.png" alt="Mesh Strategy — Coarse Mesh Verification" class="slide-img">
+      </div>
+
+      <div class="slide">
+        <div class="slide-fig">Fig. 9</div>
+        <img src="Slide9.png" alt="Refined Mesh and Static Structural Analysis" class="slide-img">
+      </div>
+
+      <div class="slide">
+        <div class="slide-fig">Fig. 10</div>
+        <div class="slide-eyebrow">Some FEA Decisions Screenshots!!</div>
+        <img src="Slide10.png" alt="Some FEA Decisions Screenshots" class="slide-img">
+      </div>
+
+      <div class="slide">
+        <div class="slide-fig">Fig. 11</div>
+        <div class="slide-eyebrow">Printing orientation directly influences bending strength due to layer adhesion characteristics.</div>
+        <img src="Slide11.png" alt="Printing Orientation and Bending Strength" class="slide-img">
+      </div>
+
+      <div class="slide">
+        <div class="slide-fig">Fig. 12</div>
+        <div class="slide-eyebrow">Iterations Done on basis of Errors found after fitting and Testing.</div>
+        <img src="Slide12.png" alt="Iterations Done on basis of Errors found after fitting and Testing" class="slide-img">
+      </div>
+
+      <div class="slide">
+        <div class="slide-fig">Fig. 13</div>
+        <div class="slide-eyebrow">Prototype Manufactured &amp; Installed</div>
+        <h2>First prototype assembled &amp; <span class="accent">installed on the vehicle</span></h2>
+        <img src="Slide13.png" alt="Prototype Manufacturing and Vehicle Installation" class="slide-img">
+        <p>The first prototype was successfully manufactured in PETG, assembled with structural steel base hardware, and installed on the vehicle. Physical installation validated that the digital assembly translated correctly to the real build — providing a functional platform for future iteration based on real-world usage and maintenance feedback.</p>
+        <ul>
+          <li>PETG dock mount printed and post-processed at mating interfaces</li>
+          <li>Assembly bolted to vehicle chassis — zero modifications required</li>
+          <li>First prototype installed and functionally demonstrated on vehicle</li>
+          <li>Platform ready for iteration: real-world feedback, material upgrade, next revision</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="nav-row">
+    <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>← Prev</button>
+    <div class="progress-dots" id="dots"></div>
+    <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+  </div>
+</div>
+
+<script>
+  /* ── GALLERY — NDA-restricted projects ──
+     Add an entry for each image or video you want in the gallery.
+     src: image/video URL or filename (upload alongside this HTML file)
+     caption: short label shown under the thumbnail and in the lightbox
+     type: "video" for video files, omit or "image" for images
+  */
+  var galleryImages = [
+    { src: "https://res.cloudinary.com/fvtkc10l/video/upload/v1790060422/Green_Red_Woman_in_Nature_Photo_Collage_1_cf9zz7.mp4", caption: "Team GridXEnergy", type: "video" },
+    { src: "https://res.cloudinary.com/fvtkc10l/image/upload/v1790059063/slide_3_vzcrif.png", caption: "Battery Lock Design and Prototyping" },
+    { src: "https://res.cloudinary.com/fvtkc10l/image/upload/v1790059144/63f5cc0d-25f1-4afe-b0ff-8c1b8dca09a6.png", caption: "Thermal Runaway Vent Calculation and Top Lid FEA" },
+    { src: "https://res.cloudinary.com/fvtkc10l/video/upload/v1790059676/WhatsApp_Video_2026-09-22_at_12.17.34_PM_g0sect.mp4", caption: "Modal Analysis FEA Setup for AIS 156 Vibration Test", type: "video" },
+    { src: "https://res.cloudinary.com/fvtkc10l/image/upload/v1790059939/16b4472c-b99d-4347-823a-b29839bd6af7.png", caption: "Completion Certificate" },
+  ];
+
+  var galleryGrid = document.getElementById('galleryGrid');
+  var galleryLightbox = document.getElementById('galleryLightbox');
+  var galleryImg = document.getElementById('galleryImg');
+  var galleryCaption = document.getElementById('galleryCaption');
+  var galleryCount = document.getElementById('galleryCount');
+  var galleryPrevBtn = document.getElementById('galleryPrevBtn');
+  var galleryNextBtn = document.getElementById('galleryNextBtn');
+  var galleryCurrent = 0;
+
+  function renderGallery() {
+    galleryGrid.innerHTML = '';
+    if (galleryImages.length === 0) {
+      var empty = document.createElement('div');
+      empty.className = 'gallery-empty';
+      empty.textContent = 'Gallery images coming soon';
+      galleryGrid.appendChild(empty);
+      return;
+    }
+    galleryImages.forEach(function(item, idx) {
+      var tile = document.createElement('div');
+      tile.className = 'gallery-item';
+      tile.setAttribute('role', 'button');
+      tile.setAttribute('tabindex', '0');
+      tile.setAttribute('aria-label', 'View: ' + item.caption);
+      tile.onclick = function() { openGallery(idx); };
+      tile.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openGallery(idx); }
+      });
+
+      if (item.type === 'video') {
+        var vid = document.createElement('video');
+        vid.src = item.src;
+        vid.autoplay = true;
+        vid.muted = true;
+        vid.loop = true;
+        vid.playsInline = true;
+        tile.appendChild(vid);
+      } else {
+        var img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.caption || '';
+        tile.appendChild(img);
+      }
+
+      if (item.caption) {
+        var cap = document.createElement('div');
+        cap.className = 'gallery-caption';
+        cap.textContent = item.caption;
+        tile.appendChild(cap);
+      }
+      galleryGrid.appendChild(tile);
+    });
+  }
+
+  function updateGalleryUI() {
+    var item = galleryImages[galleryCurrent];
+    var existingMedia = document.getElementById('galleryImg');
+    var newMedia;
+    if (item.type === 'video') {
+      newMedia = document.createElement('video');
+      newMedia.id = 'galleryImg';
+      newMedia.src = item.src;
+      newMedia.controls = true;
+      newMedia.autoplay = true;
+      newMedia.playsInline = true;
+    } else {
+      newMedia = document.createElement('img');
+      newMedia.id = 'galleryImg';
+      newMedia.src = item.src;
+      newMedia.alt = item.caption || '';
+    }
+    existingMedia.replaceWith(newMedia);
+    galleryImg = newMedia;
+    galleryCaption.textContent = item.caption || '';
+    galleryCount.textContent = pad(galleryCurrent + 1) + ' / ' + pad(galleryImages.length);
+    galleryPrevBtn.disabled = galleryCurrent === 0;
+    galleryNextBtn.disabled = galleryCurrent === galleryImages.length - 1;
+  }
+
+  function openGallery(idx) {
+    if (!galleryImages.length) return;
+    galleryCurrent = idx;
+    updateGalleryUI();
+    galleryLightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeGallery() {
+    galleryLightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    if (galleryImg.tagName === 'VIDEO') galleryImg.pause();
+  }
+
+  function changeGallery(dir) {
+    var next = galleryCurrent + dir;
+    if (next < 0 || next >= galleryImages.length) return;
+    galleryCurrent = next;
+    updateGalleryUI();
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (!galleryLightbox.classList.contains('open')) return;
+    if (e.key === 'ArrowRight') changeGallery(1);
+    if (e.key === 'ArrowLeft') changeGallery(-1);
+    if (e.key === 'Escape') closeGallery();
+  });
+
+  var galleryTouchStartX = 0, galleryTouchStartY = 0;
+  galleryLightbox.addEventListener('touchstart', function(e) {
+    galleryTouchStartX = e.touches[0].clientX;
+    galleryTouchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  galleryLightbox.addEventListener('touchend', function(e) {
+    var gdx = e.changedTouches[0].clientX - galleryTouchStartX;
+    var gdy = e.changedTouches[0].clientY - galleryTouchStartY;
+    if (Math.abs(gdy) > Math.abs(gdx) && gdy > 70) { closeGallery(); return; }
+    if (Math.abs(gdx) > 40) changeGallery(gdx < 0 ? 1 : -1);
+  }, { passive: true });
+
+  renderGallery();
+
+  var current = 0;
+  var total = 13;
+  var track = document.getElementById('track');
+  var overlay = document.getElementById('overlay');
+  var slideCount = document.getElementById('slideCount');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var dotsEl = document.getElementById('dots');
+  var progressBar = document.getElementById('progressBar');
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  for (var i = 0; i < total; i++) {
+    var d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    dotsEl.appendChild(d);
+  }
+
+  var gifSlides = [0, 3]; // 0-indexed: Slide1 and Slide4
+
+  function updateUI() {
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    slideCount.textContent = 'Fig. ' + pad(current + 1) + ' / ' + pad(total);
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total - 1;
+    var pct = ((current + 1) / total * 100).toFixed(2);
+    progressBar.style.width = pct + '%';
+    document.querySelectorAll('.dot').forEach(function(dot, idx) {
+      dot.classList.toggle('active', idx === current);
+    });
+    // Restart GIF from frame 1 each time that slide is navigated to
+    if (gifSlides.indexOf(current) !== -1) {
+      var slides = track.querySelectorAll('.slide');
+      var gif = slides[current].querySelector('img');
+      if (gif) { var s = gif.src; gif.src = ''; gif.src = s; }
+    }
+  }
+
+  function changeSlide(dir) {
+    var next = current + dir;
+    if (next < 0 || next >= total) return;
+    current = next;
+    updateUI();
+  }
+
+  function openSlides() {
+    current = 0;
+    updateUI();
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSlides() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelector('.project-card').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openSlides(); }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (!overlay.classList.contains('open')) return;
+    if (e.key === 'ArrowRight') changeSlide(1);
+    if (e.key === 'ArrowLeft') changeSlide(-1);
+    if (e.key === 'Escape') closeSlides();
+  });
+
+  var touchStartX = 0, touchStartY = 0;
+  overlay.addEventListener('touchstart', function(e) {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  overlay.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    var dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dy) > Math.abs(dx) && dy > 70) { closeSlides(); return; }
+    if (Math.abs(dx) > 40) changeSlide(dx < 0 ? 1 : -1);
+  }, { passive: true });
+
+</script>
+</body>
+</html>
